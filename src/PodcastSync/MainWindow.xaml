@@ -1,0 +1,38 @@
+﻿<Window x:Class="PodcastSync.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PodcastSync"
+        xmlns:lib="clr-namespace:PodcastSyncLib;assembly=PodcastSyncLib"
+        mc:Ignorable="d"
+        Title="Podcast Sync" Height="{Binding WindowHeight}" Width="{Binding WindowWidth}" Top="{Binding WindowTop}" Left="{Binding WindowLeft}">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type lib:Podcast}">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="72" Text="{Binding Title}" />
+                    <TextBlock Margin="20,0,0,0" FontSize="36" Text="{Binding EpisodesToDownload}" />
+                </StackPanel>
+                <TextBlock FontSize="36" Text="{Binding RssUri}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBox Name="rss" Grid.Row="2" TextWrapping="Wrap" Margin="5" FontSize="36" />
+        <Button Grid.Column="1" Grid.Row="2" FontSize="72" Margin="10" IsDefault="True" Click="Add">_Add</Button>
+        <Button Grid.Column="1" FontSize="72" Margin="10" Click="Sync" FontFamily="Segoe MDL2 Assets" ToolTip="Sync">&#xE895;</Button>
+        <Button Grid.Column="2" FontSize="72" Margin="10" Click="EditSettings" FontFamily="Segoe MDL2 Assets" ToolTip="Settings">&#xE713;</Button>
+        <ListBox Grid.Row="1" Name="podcasts" FontSize="48" Grid.ColumnSpan="3" />
+    </Grid>
+</Window>
